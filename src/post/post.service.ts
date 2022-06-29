@@ -18,12 +18,27 @@ export class PostService {
         posts: {
           include: {
             _count: {
+              select: {
+                attachments: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    return this.prisma.user.findMany({
+      include: {
+        posts: {
+          include: {
+            _count: {
               select: { attachments: true },
             },
           },
         },
       },
     });
+
     return this.prisma.user.findMany({
       include: {
         _count: {
